@@ -1,24 +1,26 @@
-<header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a href="/" class="navbar-brand">TODO App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-     <ul class="navbar-nav ml-auto">
-           @auth
-          <li class="nav-item">
-               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-          </li>
-          @else
-          <li class="nav-item">
-             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-          </li>
-          <li class="nav-item">
-             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-          </li>
-          @endauth
-     </ul>
-    </div>
-</header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">ログイン <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">設定</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">お問い合わせ</a>
+      </li>
+    </ul>
+  </div>
+
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="料理の検索" aria-label="料理の検索">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+    </form>
+
+    <h5>投稿</h5>
+</nav>

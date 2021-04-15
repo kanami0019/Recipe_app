@@ -17,8 +17,7 @@ class RecipeController extends Controller
         // $recipes = Recipe::with('ingredients')->get();
 
         $recipes = Recipe::all();
-
-        return response()->json($recipes);
+        return view('recipe.index',compact('recipes'));
 
     }
 
@@ -29,7 +28,7 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        return view('recipe.create');
     }
 
     /**
@@ -41,9 +40,7 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         $recipe = new Recipe();
-
         $recipe->title = request('title');
-
         $recipe->cooking_time = request('cooling_time');
 
         $recipe->save();

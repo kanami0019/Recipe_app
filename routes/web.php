@@ -12,9 +12,7 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'RecipeController@index'); 
 
 Route::resource("recipes", "RecipeController");
 
