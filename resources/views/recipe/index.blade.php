@@ -11,7 +11,9 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ $recipe->title }}</h5>
-                <h7 class="card-text">{{ $recipe->cooking_time }}</h7>
+                <p class="card-text">{{ $recipe->cooking_time }}</p>
+            </div>
+        </div>
 
 
     @endforeach
