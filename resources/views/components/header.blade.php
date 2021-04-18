@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/resources/views/layouts/app.blade.php">ログイン <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">ログイン <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">設定</a>

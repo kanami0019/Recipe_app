@@ -14,9 +14,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        // $recipes = Recipe::with('ingredients')->get();
-
-        $recipes = Recipe::all();
+        $recipes = \App\Recipe::with('ingredients')->get();
         return view('recipe.index',compact('recipes'));
 
     }
@@ -42,10 +40,24 @@ class RecipeController extends Controller
         $recipe = new Recipe();
         $recipe->title = request('title');
         $recipe->cooking_time = request('cooling_time');
-
         $recipe->save();
 
-        return response()->json($recipes);
+        $ingredient = new Ingredient();
+        $ingredient->ingredient_id = request('ingredient');
+        $ingredient->recipe_id = Auth::recipe('id');
+        $ingredient->name = request('name');
+        $ingredient->amount = request('amount');
+        $ingredient->save();
+
+        $cooking_step = new Cooking_step();
+        $cooking_step->cooking_step_id = request('cooking_step_id');
+        $cooking_step->recipe_id = Auth::recipe('id');
+        $cooking_step->step_num = request('step_num');
+        $cooking_step->description = request('description');
+        $cooking_step->save();
+
+        return redirect('/recipes');
+        // return response()->json($recipes);
     }
 
     /**

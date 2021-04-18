@@ -15,7 +15,7 @@
         </ul>
     </div>
 @endif
-    <form method="POST" action="/posts">
+    <form method="POST" action="/recipes">
         {{ csrf_field() }}
         <div class="form-group">
          <label for="title">料理名</label>
