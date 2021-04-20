@@ -24,7 +24,7 @@
 
         <div class="form-group">
          <label for="cooking_time">料理時間</label>
-         <input id="cooking_time"type="text" class="form-control" name="coking_time" value="{{old('cooking_time')}}">
+         <input id="cooking_time"type="text" class="form-control" name="cooking_time" value="{{old('cooking_time')}}">
         </div>
 
         <div class="form-row">

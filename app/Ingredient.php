@@ -10,4 +10,5 @@ class Ingredient extends Model
     {
         return $this->belongsTo('App\Recipe');
     }
+
 }

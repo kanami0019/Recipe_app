@@ -37,6 +37,14 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
+        $recipe->validate([
+            'title' => 'required|max:200',
+            'cooking_time' => 'required'|'integer'|'between:1,500',
+            'name' => 'required'|'max:20',
+            'amount' => 'required'|'interger'|'between:1,1000',
+            'description' => 'required'|'max:1000'
+        ]);
+
         $recipe = new Recipe();
         $recipe->title = request('title');
         $recipe->cooking_time = request('cooling_time');
@@ -56,7 +64,7 @@ class RecipeController extends Controller
         $cooking_step->description = request('description');
         $cooking_step->save();
 
-        return redirect('/recipes');
+        return redirect()->route('recipe.show',['id => $recipe->id']);
         // return response()->json($recipes);
     }
 
@@ -68,7 +76,7 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        //
+        return view('recipe.show',compact('recipe'));
     }
 
     /**

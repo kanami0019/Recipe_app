@@ -9,10 +9,11 @@
     @foreach($recipes as $recipe)
 
         <div class="card">
-            <a href="{{ url('/ingredints') }}" class="card-body">
+            <a href="/recipes/{{ $recipe->id }}" class="card-body">
                 <h5 class="card-title">{{ $recipe->title }}</h5>
                 <p class="card-text">{{ $recipe->cooking_time }}分</p>
-                <p class="card-title">{{ $recipe->amount}}</p>
+
+    
             </a>
         </div>
 

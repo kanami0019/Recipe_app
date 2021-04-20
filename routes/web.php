@@ -16,9 +16,6 @@ Route::get('/', 'RecipeController@index');
 
 Route::resource("recipes", "RecipeController");
 
-Route::get('/ingredints',function () {
-    return view('recipe/ingredints');
-});
 
 // Auth::routes();
 
