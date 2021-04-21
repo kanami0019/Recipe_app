@@ -11,10 +11,12 @@
 |
 */
 
+Route::get('/', 'RecipeController@index');
 
-Route::get('/', 'RecipeController@index'); 
 
 Route::resource("recipes", "RecipeController");
+
+
 
 
 // Auth::routes();
