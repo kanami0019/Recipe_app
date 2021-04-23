@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Ingredient;
+use App\CookingStep;
 
 class RecipeController extends Controller
 {
@@ -37,29 +40,28 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        $recipe->validate([
+        $request->validate([
             'title' => 'required|max:200',
-            'cooking_time' => 'required'|'integer'|'between:1,500',
-            'name' => 'required'|'max:20',
-            'amount' => 'required'|'interger'|'between:1,1000',
-            'description' => 'required'|'max:1000'
+            'cooking_time' => 'required|integer|between:1,500',
+            'name' => 'required|max:20',
+            'amount' => 'required|integer|between:1,1000',
+            'description' => 'required|max:1000'
         ]);
 
         $recipe = new Recipe();
+        $recipe->user_id = Auth::id();
         $recipe->title = request('title');
-        $recipe->cooking_time = request('cooling_time');
+        $recipe->cooking_time = request('cooking_time');
         $recipe->save();
 
         $ingredient = new Ingredient();
-        $ingredient->ingredient_id = request('ingredient');
-        $ingredient->recipe_id = Auth::recipe('id');
+        $ingredient->recipe_id = $recipe->id;
         $ingredient->name = request('name');
         $ingredient->amount = request('amount');
         $ingredient->save();
 
-        $cooking_step = new Cooking_step();
-        $cooking_step->cooking_step_id = request('cooking_step_id');
-        $cooking_step->recipe_id = Auth::recipe('id');
+        $cooking_step = new CookingStep();
+        $cooking_step->recipe_id = $recipe->id;
         $cooking_step->step_num = request('step_num');
         $cooking_step->description = request('description');
         $cooking_step->save();
@@ -87,7 +89,8 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        //
+        $recipe = Recipe::find($request->id);
+        return view('recipe.edit', compact('recipe')); 
     }
 
     /**

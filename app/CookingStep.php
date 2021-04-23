@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cooking_Step extends Model
+class CookingStep extends Model
 {
     public function recipe()
     {

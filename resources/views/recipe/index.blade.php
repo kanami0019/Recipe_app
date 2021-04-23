@@ -4,13 +4,15 @@
 
 @section('content')
 
-    <a href="/recipes/create">投稿</a>
-
+ <div class='d-flex justify-content-between'>
     <h1>Recipe</h1>
-    <div style="display:inline-flex">
-        <form class="form-inline my-2 my-lg-0 ">
-        <input class="form-control mr-sm-2" type="search" placeholder="料理の検索" aria-label="料理の検索">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+    <a href="/recipes/create">投稿</a>
+ </div>
+
+    <div class="d-flex inline align-items-center  justify-content-center">
+        <form action="cgi-bin/example.cgi" method="post">
+            <input type="search" name="search" placeholder="料理の検索">
+            <input type="submit" name="submit" value="検索">
         </form>
     </div>
 

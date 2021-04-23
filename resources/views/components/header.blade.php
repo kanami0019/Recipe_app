@@ -5,8 +5,9 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      @auth
       <li class="nav-item">
-        <a class="dropdown-item" href="{{ route('logout') }}" >ログアウト</a>
+        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
          @csrf
       </li>
@@ -18,5 +19,14 @@
       </li>
     </ul>
     </div>
+
+    @else
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('register') }}">新規登録</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('login') }}">ログイン</a>
+    </li>
+  @endauth
 
 </header>

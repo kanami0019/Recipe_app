@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
 <h1>レシピ投稿</h1>
 
 @if ($errors->any())
@@ -17,6 +19,8 @@
 @endif
     <form method="POST" action="/recipes">
         {{ csrf_field() }}
+
+        
         <div class="form-group">
          <label for="title">料理名</label>
           <input id="title" type="text" class="form-control" name="title" value="{{old('title')}}">
@@ -24,7 +28,9 @@
 
         <div class="form-group">
          <label for="cooking_time">料理時間</label>
+        <div class="d-flex">
          <input id="cooking_time"type="text" class="form-control" name="cooking_time" value="{{old('cooking_time')}}">
+         <h7>分</h7>
         </div>
 
         <div class="form-row">
@@ -42,6 +48,7 @@
 
         <div class="form-group">
          <label for="description">作り方</label>
+         <input id="step_num" type="hidden" name="step_num" value="9">
          <textarea id="description" class="form-control"  name="description"> {{old('description')}}</textarea>
         </div>
 
@@ -49,5 +56,7 @@
 
         <button type="submit" class="btn btn-outline-primary">投稿</button>
     </form>
+
+    <a href="/" class="d-flex px-2 py-4">投稿履歴</a>
 
 @endsection
