@@ -10,23 +10,22 @@
  </div>
 
     <div class="d-flex inline align-items-center  justify-content-center">
-        <form action="cgi-bin/example.cgi" method="post">
+        <form action="{{ url('/serch')}}" method="POST">
+        {{ csrf_field() }}
+            <input type="hidden" name="_method" value="GET">
             <input type="search" name="search" placeholder="料理の検索">
             <input type="submit" name="submit" value="検索">
-        </form>
     </div>
-
+ 
     @foreach($recipes as $recipe)
 
         <div class="card">
             <a href="/recipes/{{ $recipe->id }}" class="card-body">
                 <h5 class="card-title">{{ $recipe->title }}</h5>
                 <p class="card-text">{{ $recipe->cooking_time }}分</p>
-
     
             </a>
         </div>
-
 
     @endforeach
 

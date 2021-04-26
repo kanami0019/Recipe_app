@@ -13,6 +13,6 @@ class Recipe extends Model
 
    public function cooking_steps()
    {
-        return $this->hasMany('App\Cooking_Step');
+        return $this->hasMany('App\CookingStep');
    }
 }

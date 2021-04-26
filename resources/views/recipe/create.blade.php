@@ -57,6 +57,6 @@
         <button type="submit" class="btn btn-outline-primary">投稿</button>
     </form>
 
-    <a href="/" class="d-flex px-2 py-4">投稿履歴</a>
+    <a href="{{'/postindex'}}"  class="d-flex px-2 py-4">投稿履歴</a>
 
 @endsection

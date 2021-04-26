@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', 'RecipeController@index')->middleware('auth');
+Route::get('/', 'RecipeController@index');
 
+Route::get('/serch','RecipeController@serch');
 
-Route::resource("recipes", "RecipeController")->middleware('auth');
+Route::get('/postindex','RecipeController@postindex');
 
+Route::get('/postshow','RecipeController@postshow');
 
+Route::resource("recipes", "RecipeController");
 
 
 // Auth::routes();

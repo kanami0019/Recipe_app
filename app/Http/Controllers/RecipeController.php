@@ -17,7 +17,8 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = \App\Recipe::with('ingredients')->get();
+        $recipes = \App\Recipe::with(['ingredients','cooking_steps'])->get();
+        $recipes = \App\Recipe::inRandomOrder()->get();
         return view('recipe.index',compact('recipes'));
 
     }
@@ -89,7 +90,6 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        $recipe = Recipe::find($request->id);
         return view('recipe.edit', compact('recipe')); 
     }
 
@@ -114,5 +114,23 @@ class RecipeController extends Controller
     public function destroy(Recipe $recipe)
     {
         //
+    }
+
+
+    public function serch(Request $request) 
+    {
+
+        return view('recipe.serch');
+    }
+
+    public function postindex()
+    {
+        $recipes = \App\Recipe::with('ingredients')->get();
+        return view('recipe.postindex',compact('recipes'));
+    }
+
+    public function postshow(Recipe $recipe)
+    {   
+        return view('recipe.postshow',compact('recipe'));
     }
 }
