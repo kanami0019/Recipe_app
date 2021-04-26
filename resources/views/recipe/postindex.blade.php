@@ -10,17 +10,18 @@
  </div>
 
     @foreach($recipes as $recipe)
+        @if(Auth::user()->can('view', $recipe))
 
-        <div class="card">
-            <a href="/postshow" class="card-body">
-                <h5 class="card-title">{{ $recipe->title }}</h5>
-                <p class="card-text">{{ $recipe->cooking_time }}分</p>
+            <div class="card">
+                <a href="/postshow" class="card-body">
+                    <h5 class="card-title">{{ $recipe->title }}</h5>
+                    <p class="card-text">{{ $recipe->cooking_time }}分</p>
 
     
-            </a>
-        </div>
+                </a>
+            </div>
 
-
+        @endif
     @endforeach
 
 

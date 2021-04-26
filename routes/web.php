@@ -11,15 +11,15 @@
 |
 */
 
-Route::get('/', 'RecipeController@index');
+Route::get('/', 'RecipeController@index')->middleware('auth');
 
-Route::get('/serch','RecipeController@serch');
+Route::get('/serch','RecipeController@serch')->middleware('auth');
 
-Route::get('/postindex','RecipeController@postindex');
+Route::get('/postindex','RecipeController@postindex')->middleware('auth');
 
-Route::get('/postshow','RecipeController@postshow');
+Route::get('/postshow','RecipeController@postshow')->middleware('auth');
 
-Route::resource("recipes", "RecipeController");
+Route::resource("recipes", "RecipeController")->middleware('auth');
 
 
 // Auth::routes();
@@ -28,4 +28,4 @@ Route::resource("recipes", "RecipeController");
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

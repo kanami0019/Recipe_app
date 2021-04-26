@@ -125,7 +125,8 @@ class RecipeController extends Controller
 
     public function postindex()
     {
-        $recipes = \App\Recipe::with('ingredients')->get();
+        $user = Auth::user();
+        $recipes = \App\Recipe::with(['ingredients','cooking_steps'])->get();
         return view('recipe.postindex',compact('recipes'));
     }
 
