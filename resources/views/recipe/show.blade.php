@@ -22,5 +22,9 @@
         <h5 class="card-text">{{ $cooking_step->step_num }}</h5>
         <h5 class="card-text">{{ $cooking_step->description }}</h5>
 
-    @endforeach   
+    @endforeach
+
+
 @endsection
+
+    

@@ -102,7 +102,33 @@ class RecipeController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:200',
+            'cooking_time' => 'required|integer|between:1,500',
+            'name' => 'required|max:20',
+            'amount' => 'required|integer|between:1,1000',
+            'description' => 'required|max:1000'
+        ]);
+
+        $recipe = new Recipe();
+        $recipe->user_id = Auth::id();
+        $recipe->title = request('title');
+        $recipe->cooking_time = request('cooking_time');
+        $recipe->save();
+
+        $ingredient = new Ingredient();
+        $ingredient->recipe_id = $recipe->id;
+        $ingredient->name = request('name');
+        $ingredient->amount = request('amount');
+        $ingredient->save();
+
+        $cooking_step = new CookingStep();
+        $cooking_step->recipe_id = $recipe->id;
+        $cooking_step->step_num = request('step_num');
+        $cooking_step->description = request('description');
+        $cooking_step->save();
+
+        return redirect()->route('recipe.postshow',['id => $recipe->id']);
     }
 
     /**
@@ -113,7 +139,8 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+        return redirect()->route('recipe.index');
     }
 
 
@@ -128,6 +155,7 @@ class RecipeController extends Controller
         $user = Auth::user();
         $recipes = \App\Recipe::with(['ingredients','cooking_steps'])->get();
         return view('recipe.postindex',compact('recipes'));
+
     }
 
     public function postshow(Recipe $recipe)
