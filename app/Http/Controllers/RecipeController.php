@@ -123,7 +123,7 @@ class RecipeController extends Controller
         return view('recipe.serch');
     }
 
-    public function postindex()
+    public function postindex(Recipe $recipe)
     {
         $user = Auth::user();
         $recipes = \App\Recipe::with(['ingredients','cooking_steps'])->get();

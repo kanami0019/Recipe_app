@@ -13,7 +13,7 @@
         @if(Auth::user()->can('view', $recipe))
 
             <div class="card">
-                <a href="/postshow" class="card-body">
+                <a href="/post/{recipe}" class="card-body">
                     <h5 class="card-title">{{ $recipe->title }}</h5>
                     <p class="card-text">{{ $recipe->cooking_time }}分</p>
 

@@ -15,9 +15,9 @@ Route::get('/', 'RecipeController@index')->middleware('auth');
 
 Route::get('/serch','RecipeController@serch')->middleware('auth');
 
-Route::get('/postindex','RecipeController@postindex')->middleware('auth');
+Route::get('/post','RecipeController@postindex')->name('postindex')->middleware('auth');
 
-Route::get('/postshow','RecipeController@postshow')->middleware('auth');
+Route::get('/post/{recipe}','RecipeController@postshow')->name('postshow')->middleware('auth');
 
 Route::resource("recipes", "RecipeController")->middleware('auth');
 
