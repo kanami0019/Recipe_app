@@ -29,24 +29,33 @@
          <h7>分</h7>
         </div>
 
+        @foreach($recipe->ingredients as $ingredient)
+
         <div class="form-row">
          <div class="form-group col-sm-6">
           <label for="name">材料</label>
-          <input id="name" type="text" class="form-control" name="name" value="{{ old('name') == '' ? $recipe->name : old('name') }}">
+          <input id="name" type="text" class="form-control" name="name" value="{{ old('name') == '' ? $ingredient->name : old('name') }}">
          </div>
 
          <div class="form-group col-sm-6">
           <label for="amount">量</label>
-          <input id="amount" type="text" class="form-control" name="amount" value="{{ old('amount') == '' ? $recipe->amount : old('amount') }}">
+          <input id="amount" type="text" class="form-control" name="amount" value="{{ old('amount') == '' ? $ingredient->amount : old('amount') }}">
          </div>
-        
         </div>
+        @endforeach
 
         <div class="form-group">
          <label for="description">作り方</label>
          <input id="step_num" type="hidden" name="step_num" value="9">
 
-         <textarea id="description" class="form-control"  name="description"> {{ old('description') == '' ? $recipe->description : old('description') )}</textarea>
+         @foreach($recipe->cooking_steps as $cooking_step)
+
+         <textarea id="description" class="form-control"  name="description">{{ old('description') == '' ? $cooking_step->description : old('description') }}</textarea>
         </div>
+
+        @endforeach
+
+<button type="submit" class="btn btn-outline-primary">編集</button>
+    </form>
 
 @endsection

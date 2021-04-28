@@ -20,6 +20,7 @@ class RecipeController extends Controller
         $recipes = \App\Recipe::with(['ingredients','cooking_steps'])->get();
         $recipes = \App\Recipe::inRandomOrder()->get();
         return view('recipe.index',compact('recipes'));
+        
 
     }
 
@@ -68,7 +69,6 @@ class RecipeController extends Controller
         $cooking_step->save();
 
         return redirect()->route('recipe.show',['id => $recipe->id']);
-        // return response()->json($recipes);
     }
 
     /**
@@ -158,8 +158,4 @@ class RecipeController extends Controller
 
     }
 
-    public function postshow(Recipe $recipe)
-    {   
-        return view('recipe.postshow',compact('recipe'));
-    }
 }
