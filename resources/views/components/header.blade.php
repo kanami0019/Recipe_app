@@ -8,8 +8,9 @@
       @auth
       <li class="nav-item">
         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-         @csrf
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">設定</a>
@@ -18,7 +19,7 @@
         <a class="nav-link" href="#">お問い合わせ</a>
       </li>
     </ul>
-    </div>
+  </div>
 
     @else
     <li class="nav-item">
