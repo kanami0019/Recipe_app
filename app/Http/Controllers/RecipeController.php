@@ -47,8 +47,17 @@ class RecipeController extends Controller
             'cooking_time' => 'required|integer|between:1,500',
             'name' => 'required|max:20',
             'amount' => 'required|integer|between:1,1000',
-            'description' => 'required|max:1000'
+            'description' => 'required|max:1000',
+            'image' => 'image|file',
         ]);
+
+        if ($file = $request->image) {
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('uploads/');
+            $file->move($target_path, $fileName);
+        } else {
+            $fileName = "";
+        }
 
         $recipe = new Recipe();
         $recipe->user_id = Auth::id();
@@ -66,9 +75,10 @@ class RecipeController extends Controller
         $cooking_step->recipe_id = $recipe->id;
         $cooking_step->step_num = request('step_num');
         $cooking_step->description = request('description');
+        $cooking_step->image = $fileName;
         $cooking_step->save();
 
-        return redirect()->route('recipe.show',['id => $recipe->id']);
+        return redirect()->route('recipe.show',['id' => $recipe->id]);
     }
 
     /**
@@ -128,7 +138,7 @@ class RecipeController extends Controller
         $cooking_step->description = request('description');
         $cooking_step->save();
 
-        return redirect()->route('recipe.postshow',['id => $recipe->id']);
+        return redirect()->route('recipes.show',['id' => $recipe->id]);
     }
 
     /**
@@ -140,7 +150,7 @@ class RecipeController extends Controller
     public function destroy(Recipe $recipe)
     {
         $recipe->delete();
-        return redirect()->route('recipe.index');
+        return redirect()->route('recipes.index');
     }
 
 

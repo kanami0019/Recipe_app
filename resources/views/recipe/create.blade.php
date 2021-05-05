@@ -46,11 +46,17 @@
         
         </div>
 
-        <div class="form-group">
-         <label for="description">作り方</label>
-         <input id="step_num" type="hidden" name="step_num" value="9">
-         <textarea id="description" class="form-control"  name="description"> {{old('description')}}</textarea>
-        </div>
+         <div class="form-group">
+          <label for="description">作り方</label>
+          <input id="step_num" type="hidden" name="step_num" value="9">
+          <textarea id="description" class="form-control"  name="description"> {{old('description')}}</textarea>
+         </div>
+
+         <form method="POST" action="/recipes"enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="cooking_steps_img">
+         </form> 
+         <hr>
 
  
 

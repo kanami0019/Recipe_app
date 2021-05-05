@@ -14,7 +14,7 @@
         </ul>
     </div>
 @endif
-    <form method="POST" action="/recipes">
+    <form method="POST" action="/recipes/{{ $recipe->id }}">
         {{ csrf_field() }}
         <input type="hidden" name="_method" value="PUT">
         <div class="form-group">

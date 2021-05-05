@@ -21,7 +21,10 @@
     @foreach($recipe->cooking_steps as $cooking_step)
 
         <h5 class="card-text">{{ $cooking_step->step_num }}</h5>
+
         <h5 class="card-text">{{ $cooking_step->description }}</h5>
+
+        <img src="public/uploads/{{ $cooking_step->image }}" width="200px" height="200px">>
 
     @endforeach
 
