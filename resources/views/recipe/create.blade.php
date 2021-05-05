@@ -17,7 +17,7 @@
         </ul>
     </div>
 @endif
-    <form method="POST" action="/recipes">
+    <form method="POST" action="/recipes" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         
@@ -52,10 +52,8 @@
           <textarea id="description" class="form-control"  name="description"> {{old('description')}}</textarea>
          </div>
 
-         <form method="POST" action="/recipes"enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="cooking_steps_img">
-         </form> 
+         <input type="file" name="image">
+         
          <hr>
 
  

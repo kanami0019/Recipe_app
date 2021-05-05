@@ -53,6 +53,12 @@
          <textarea id="description" class="form-control"  name="description">{{ old('description') == '' ? $cooking_step->description : old('description') }}</textarea>
         </div>
 
+        <form method="POST" action="/recipes" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="image">
+         </form> 
+         <hr>
+
         @endforeach
 
 <button type="submit" class="btn btn-outline-primary">編集</button>

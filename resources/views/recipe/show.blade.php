@@ -24,7 +24,7 @@
 
         <h5 class="card-text">{{ $cooking_step->description }}</h5>
 
-        <img src="public/uploads/{{ $cooking_step->image }}" width="200px" height="200px">>
+        <img src="public/images/{{ $cooking_step->image }}" width="200px" height="200px">
 
     @endforeach
 

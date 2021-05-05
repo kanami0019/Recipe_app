@@ -53,7 +53,7 @@ class RecipeController extends Controller
 
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
-            $target_path = public_path('uploads/');
+            $target_path = public_path('images/');
             $file->move($target_path, $fileName);
         } else {
             $fileName = "";
@@ -78,7 +78,7 @@ class RecipeController extends Controller
         $cooking_step->image = $fileName;
         $cooking_step->save();
 
-        return redirect()->route('recipe.show',['id' => $recipe->id]);
+        return redirect()->route('recipes.show',['id' => $recipe->id]);
     }
 
     /**
@@ -120,6 +120,14 @@ class RecipeController extends Controller
             'description' => 'required|max:1000'
         ]);
 
+        if ($file = $request->image) {
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('uploads/');
+            $file->move($target_path, $fileName);
+        } else {
+            $fileName = "";
+        }
+
         $recipe = new Recipe();
         $recipe->user_id = Auth::id();
         $recipe->title = request('title');
@@ -136,6 +144,7 @@ class RecipeController extends Controller
         $cooking_step->recipe_id = $recipe->id;
         $cooking_step->step_num = request('step_num');
         $cooking_step->description = request('description');
+        $cooking_step->image = $fileName;
         $cooking_step->save();
 
         return redirect()->route('recipes.show',['id' => $recipe->id]);
