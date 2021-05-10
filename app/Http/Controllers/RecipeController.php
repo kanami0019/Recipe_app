@@ -170,13 +170,19 @@ class RecipeController extends Controller
 
     public function search(Request $request) 
     {
-        // dd($request->search);
-        $recipes = Recipe::Where('title','like',"%{$request->search}%")->get();
+        $recipes = Recipe::With(['ingredients'=> function($ingredient){
+            $ingredient->where('name','like',"%{$request->search}%")
+            ->orWhere('title','like',"%{$request->search}%");
+
+        }])->get();
+
+        // $recipes = Recipe::Where('title','like',"%{$request->search}%")->get();
+
 
         if($request->search){
-        $search_result = $request->search.'の検索結果'.$recipes->count().'件';
+            $search_result = $request->search.'の検索結果'.$recipes->count().'件';
     
-        return view('recipe.index',compact('recipes','search_result'));
+            return view('recipe.index',compact('recipes','search_result'));
         }else{
             return view('recipe.index',compact('recipes'));
         }
