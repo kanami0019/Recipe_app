@@ -173,9 +173,13 @@ class RecipeController extends Controller
         // dd($request->search);
         $recipes = Recipe::Where('title','like',"%{$request->search}%")->get();
 
+        if($request->search){
         $search_result = $request->search.'の検索結果'.$recipes->count().'件';
     
         return view('recipe.index',compact('recipes','search_result'));
+        }else{
+            return view('recipe.index',compact('recipes'));
+        }
 
     
     }

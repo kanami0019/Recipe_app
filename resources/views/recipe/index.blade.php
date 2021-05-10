@@ -15,12 +15,12 @@
             <input type="search" name="search" placeholder="料理の検索">
             <input type="submit" name="submit" value="検索">
     </div>
-
-        @isset($search_result )
-            <h5 class ="card-title">{{ $search_result }}</h5>
+</div>
+            @isset($search_result)
+                <h5 class ="card-title">{{ $search_result }}</h5>
             
-        @endisset
- 
+            @endisset
+
     @foreach($recipes as $recipe)
 
         <div class="card">
