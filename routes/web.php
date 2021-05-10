@@ -13,7 +13,7 @@
 
 Route::get('/', 'RecipeController@index')->middleware('auth');
 
-Route::get('/serch','RecipeController@serch')->middleware('auth');
+Route::POST('/recipes/search','RecipeController@search')->name('recipes.search')->middleware('auth');
 
 Route::get('/post','RecipeController@postindex')->name('postindex')->middleware('auth');
 

@@ -19,6 +19,7 @@ class RecipeController extends Controller
     {
         $recipes = \App\Recipe::with(['ingredients','cooking_steps'])->get();
         $recipes = \App\Recipe::inRandomOrder()->get();
+
         return view('recipe.index',compact('recipes'));
         
 
@@ -48,7 +49,7 @@ class RecipeController extends Controller
             'name' => 'required|max:20',
             'amount' => 'required|integer|between:1,1000',
             'description' => 'required|max:1000',
-            'image' => 'image|file',
+            'image' => 'file',
         ]);
 
         if ($file = $request->image) {
@@ -117,34 +118,38 @@ class RecipeController extends Controller
             'cooking_time' => 'required|integer|between:1,500',
             'name' => 'required|max:20',
             'amount' => 'required|integer|between:1,1000',
-            'description' => 'required|max:1000'
+            'description' => 'required|max:1000',
+            'image' => 'file',
         ]);
 
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
-            $target_path = public_path('uploads/');
+            $target_path = public_path('images/');
             $file->move($target_path, $fileName);
+            
         } else {
             $fileName = "";
+
         }
 
-        $recipe = new Recipe();
         $recipe->user_id = Auth::id();
         $recipe->title = request('title');
         $recipe->cooking_time = request('cooking_time');
         $recipe->save();
 
-        $ingredient = new Ingredient();
+        $ingredient = $recipe->ingredients[0];
         $ingredient->recipe_id = $recipe->id;
         $ingredient->name = request('name');
         $ingredient->amount = request('amount');
         $ingredient->save();
 
-        $cooking_step = new CookingStep();
+        $cooking_step = $recipe->cooking_steps[0];
         $cooking_step->recipe_id = $recipe->id;
         $cooking_step->step_num = request('step_num');
         $cooking_step->description = request('description');
-        $cooking_step->image = $fileName;
+        if($fileName){
+            $cooking_step->image = $fileName;
+        };
         $cooking_step->save();
 
         return redirect()->route('recipes.show',['id' => $recipe->id]);
@@ -163,11 +168,19 @@ class RecipeController extends Controller
     }
 
 
-    public function serch(Request $request) 
+    public function search(Request $request) 
     {
+        // dd($request->search);
+        $recipes = Recipe::Where('title','like',"%{$request->search}%")->get();
 
-        return view('recipe.serch');
+        $search_result = $request->search.'の検索結果'.$recipes->count().'件';
+    
+        return view('recipe.index',compact('recipes','search_result'));
+
+    
     }
+
+    
 
     public function postindex(Recipe $recipe)
     {

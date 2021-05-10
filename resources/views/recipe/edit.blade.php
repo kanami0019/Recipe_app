@@ -14,7 +14,7 @@
         </ul>
     </div>
 @endif
-    <form method="POST" action="/recipes/{{ $recipe->id }}">
+    <form method="POST" action="/recipes/{{ $recipe->id }}"enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
@@ -53,10 +53,9 @@
          <textarea id="description" class="form-control"  name="description">{{ old('description') == '' ? $cooking_step->description : old('description') }}</textarea>
         </div>
 
-        <form method="POST" action="/recipes" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="image">
-         </form> 
+         <img src= "{{asset('images/'.$cooking_step->image)}}" width="200px" height="200px" value="{{ old('image') == '' ? $cooking_step->image : old('image') }}">
+
+         <input type="file" name="image">
          <hr>
 
         @endforeach

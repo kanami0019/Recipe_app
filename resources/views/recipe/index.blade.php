@@ -10,12 +10,16 @@
  </div>
 
     <div class="d-flex inline align-items-center  justify-content-center">
-        <form action="{{ url('/serch')}}" method="POST">
+        <form action="/recipes/search" method="POST">
         {{ csrf_field() }}
-            <input type="hidden" name="_method" value="GET">
             <input type="search" name="search" placeholder="料理の検索">
             <input type="submit" name="submit" value="検索">
     </div>
+
+        @isset($search_result )
+            <h5 class ="card-title">{{ $search_result }}</h5>
+            
+        @endisset
  
     @foreach($recipes as $recipe)
 

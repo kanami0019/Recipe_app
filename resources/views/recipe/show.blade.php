@@ -24,7 +24,11 @@
 
         <h5 class="card-text">{{ $cooking_step->description }}</h5>
 
-        <img src="public/images/{{ $cooking_step->image }}" width="200px" height="200px">
+        @if($cooking_step->image)
+        
+            <img src= "{{asset('images/'.$cooking_step->image)}}" width="200px" height="200px">
+
+        @endif 
 
     @endforeach
 
