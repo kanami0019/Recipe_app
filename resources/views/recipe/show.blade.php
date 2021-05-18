@@ -8,6 +8,11 @@
 
     <div class="card">
         <div class="card-body">
+        @if($recipe->image)
+        
+            <img src= "{{asset('images/'.$recipe->image)}}" width="170px" height="170px">
+
+        @endif 
             <h5 class="card-title">{{ $recipe->title }}</h5>
             <p class="card-text">{{ $recipe->cooking_time }}分</p>
 

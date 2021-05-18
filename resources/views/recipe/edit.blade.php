@@ -21,6 +21,13 @@
          <label for="title">料理名</label>
           <input id="title" type="text" class="form-control" name="title" value="{{ old('title') == '' ? $recipe->title : old('title') }}">
         </div>
+        
+        <div id="preview">
+            <img id="previewImage" src= "{{asset('images/'.$recipe->image)}}" width="200px" height="200px" value="{{ old('image') == '' ? $recipe->image : old('image') }}">
+        </div>
+
+        <input type="file" name="recipe_image" onChange="imgPreView(event)">
+        <hr>
 
         <div class="form-group">
          <label for="cooking_time">料理時間</label>
@@ -53,9 +60,10 @@
          <textarea id="description" class="form-control"  name="description">{{ old('description') == '' ? $cooking_step->description : old('description') }}</textarea>
         </div>
 
-         <img src= "{{asset('images/'.$cooking_step->image)}}" width="200px" height="200px" value="{{ old('image') == '' ? $cooking_step->image : old('image') }}">
-
-         <input type="file" name="image">
+        <div id="preview2">
+         <img id="previewImage2" src= "{{asset('images/'.$cooking_step->image)}}" width="200px" height="200px" value="{{ old('image') == '' ? $cooking_step->image : old('image') }}">
+         </div>
+         <input type="file" name="image" onChange="imgPreView2(event)">
          <hr>
 
         @endforeach
@@ -64,3 +72,49 @@
     </form>
 
 @endsection
+
+<script>
+function imgPreView(event) {
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  var preview = document.getElementById("preview");
+  var previewImage = document.getElementById("previewImage");
+   
+  if(previewImage != null) {
+    preview.removeChild(previewImage);
+  }
+  reader.onload = function(event) {
+    var img = document.createElement("img");
+    img.setAttribute("src", reader.result);
+    img.setAttribute("id", "previewImage");
+    img.setAttribute("width","200px");
+    img.setAttribute("height","200px");
+    preview.appendChild(img);
+  };
+ 
+  reader.readAsDataURL(file);
+}
+
+function imgPreView2(event) {
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  var preview = document.getElementById("preview2");
+  var previewImage = document.getElementById("previewImage2");
+   
+  if(previewImage != null) {
+    preview.removeChild(previewImage);
+  }
+  reader.onload = function(event) {
+    var img = document.createElement("img");
+    img.setAttribute("src", reader.result);
+    img.setAttribute("id", "previewImage2");
+    img.setAttribute("width","200px");
+    img.setAttribute("height","200px");
+    preview.appendChild(img);
+  };
+ 
+  reader.readAsDataURL(file);
+}
+
+
+</script>

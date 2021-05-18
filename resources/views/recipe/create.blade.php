@@ -26,6 +26,10 @@
           <input id="title" type="text" class="form-control" name="title" value="{{old('title')}}">
         </div>
 
+        <input type="file" name="recipe_image">
+
+        <hr>
+
         <div class="form-group">
          <label for="cooking_time">料理時間</label>
         <div class="d-flex">

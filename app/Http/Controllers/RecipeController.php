@@ -50,7 +50,17 @@ class RecipeController extends Controller
             'amount' => 'required|integer|between:1,1000',
             'description' => 'required|max:1000',
             'image' => 'file',
+            'recipe_image' => 'file',
         ]);
+
+        if ($file = $request->recipe_image) {
+            $recipeFileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('images/');
+            $file->move($target_path, $recipeFileName);
+            
+        } else {
+            $recipeFileName = "";
+        }
 
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
@@ -64,6 +74,7 @@ class RecipeController extends Controller
         $recipe->user_id = Auth::id();
         $recipe->title = request('title');
         $recipe->cooking_time = request('cooking_time');
+        $recipe->image = $recipeFileName;
         $recipe->save();
 
         $ingredient = new Ingredient();
@@ -120,7 +131,18 @@ class RecipeController extends Controller
             'amount' => 'required|integer|between:1,1000',
             'description' => 'required|max:1000',
             'image' => 'file',
+            'recipe_image' => 'file',
         ]);
+
+        if ($file = $request->recipe_image) {
+            $recipeFileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('images/');
+            $file->move($target_path, $recipeFileName);
+            
+        } else {
+            $recipeFileName = "";
+
+        }
 
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
@@ -135,6 +157,9 @@ class RecipeController extends Controller
         $recipe->user_id = Auth::id();
         $recipe->title = request('title');
         $recipe->cooking_time = request('cooking_time');
+        if($recipeFileName){
+            $recipe->image = $recipeFileName;
+        };
         $recipe->save();
 
         $ingredient = $recipe->ingredients[0];
@@ -170,24 +195,13 @@ class RecipeController extends Controller
 
     public function search(Request $request) 
     {
-        $recipes = Recipe::With(['ingredients'=> function($ingredient){
-            $ingredient->where('name','like',"%{$request->search}%")
-            ->orWhere('title','like',"%{$request->search}%");
+        $search = $request->search;
+        $recipes = Recipe::whereHas('ingredients',function($ingredient)use($search){
+            $ingredient->where('name','like',"%{$search}%");
 
-        }])->get();
+        })->orWhere('title','like',"%{$search}%")->get();
 
-        // $recipes = Recipe::Where('title','like',"%{$request->search}%")->get();
-
-
-        if($request->search){
-            $search_result = $request->search.'の検索結果'.$recipes->count().'件';
-    
-            return view('recipe.index',compact('recipes','search_result'));
-        }else{
-            return view('recipe.index',compact('recipes'));
-        }
-
-    
+        return view('recipe.index',compact('recipes','search'));
     }
 
     
